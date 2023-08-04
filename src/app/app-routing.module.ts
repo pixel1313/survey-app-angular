@@ -6,9 +6,11 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from './security';
 import { RegisterComponent } from './pages/register/register.component';
+import { DashboardPage } from './pages/dashboard/DashboardPage';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'dashboard', component: DashboardPage },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'surveys', component: SurveyListComponent, canActivate: [AuthGuard] },

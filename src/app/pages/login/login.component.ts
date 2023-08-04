@@ -20,8 +20,7 @@ export class LoginComponent {
     ) {
         // redirect to home if already logged in
         if(this.accountService.userValue) {
-            // TODO: redirect to user dashboard.
-            this.router.navigate(['/']);
+            this.router.navigate(['/dashboard']);
         }
     }
 

@@ -12,6 +12,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ErrorInterceptor, TokenInterceptor } from './security';
 import { RegisterComponent } from './pages/register/register.component';
 import { AlertComponent } from './components';
+import { DashboardPage } from './pages/dashboard/DashboardPage';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { AlertComponent } from './components';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
+    DashboardPage,
   ],
   imports: [
     BrowserModule,
