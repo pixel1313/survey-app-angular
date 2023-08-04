@@ -52,7 +52,7 @@ export class LoginComponent {
                 next: () => {
                     // TODO: go to user dashboard instead.
                     // get return url from query parameters or default to home page
-                    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/'
+                    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard'
                     this.router.navigateByUrl(returnUrl);
                 },
                 error: error => {
