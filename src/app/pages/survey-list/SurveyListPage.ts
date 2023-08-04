@@ -2,11 +2,8 @@ import { Component } from "@angular/core";
 import { Survey } from "@app/models";
 import { SurveyService } from "@app/services";
 
-@Component({
-    selector: 'app-survey-list',
-    templateUrl: './survey-list.component.html'
-})
-export class SurveyListComponent {
+@Component({ templateUrl: './SurveyListPage.html' })
+export class SurveyListPage {
     surveys: Survey[] = [];
 
     page = 1;

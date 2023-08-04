@@ -5,8 +5,8 @@ import { AlertService } from "@app/services";
 import { AccountService } from "@app/services/account.service";
 import { first } from "rxjs";
 
-@Component({ templateUrl: './login.component.html' })
-export class LoginComponent {
+@Component({ templateUrl: './LoginPage.html' })
+export class LoginPage {
     form!: FormGroup;
     loading = false;
     submitted = false;

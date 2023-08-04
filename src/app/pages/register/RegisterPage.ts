@@ -4,8 +4,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { AccountService, AlertService } from "@app/services";
 import { first } from "rxjs";
 
-@Component({ templateUrl: 'register.component.html' })
-export class RegisterComponent implements OnInit {
+@Component({ templateUrl: 'RegisterPage.html' })
+export class RegisterPage implements OnInit {
     form!: FormGroup;
     loading = false;
     submitted = false;

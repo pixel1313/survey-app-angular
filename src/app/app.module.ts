@@ -4,15 +4,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SurveyListComponent } from './pages/survey-list/survey-list.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoginComponent } from './pages/login/login.component';
-import { HomeComponent } from './pages/home/home.component';
+
+// interceptors
 import { ErrorInterceptor, TokenInterceptor } from './security';
-import { RegisterComponent } from './pages/register/register.component';
+
+// components
 import { AlertComponent } from './components';
-import { DashboardPage } from './pages/dashboard/DashboardPage';
+
+// pages
+import { DashboardPage, HomePage, LoginPage, RegisterPage, SurveyListPage } from './pages';
 
 @NgModule({
   declarations: [
@@ -20,10 +22,10 @@ import { DashboardPage } from './pages/dashboard/DashboardPage';
     AlertComponent,
     // pages
     AppComponent,
-    SurveyListComponent,
-    LoginComponent,
-    RegisterComponent,
-    HomeComponent,
+    SurveyListPage,
+    LoginPage,
+    RegisterPage,
+    HomePage,
     DashboardPage,
   ],
   imports: [
