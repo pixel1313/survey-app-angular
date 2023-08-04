@@ -1,19 +1,15 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AccountService } from "@app/services/account.service";
+import { AccountService } from "@app/services";
 import { first } from "rxjs";
 
-@Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-})
-export class LoginComponent {
+@Component({ templateUrl: 'register.component.html' })
+export class RegisterComponent implements OnInit {
     form!: FormGroup;
     loading = false;
     submitted = false;
     error?: string;
-    success?: string;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -23,49 +19,35 @@ export class LoginComponent {
     ) {
         // redirect to home if already logged in
         if(this.accountService.userValue) {
-            // TODO: redirect to user dashboard.
             this.router.navigate(['/']);
         }
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.form = this.formBuilder.group({
+            username: ['', Validators.required],
             email: ['', Validators.required],
-            password: ['', Validators.required],
+            password: ['', [Validators.required, Validators.minLength(8)]],
         });
-
-        // show success message after registration
-        if(this.route.snapshot.queryParams.registered) {
-            this.success = 'Registration successful';
-        }
     }
 
-    /**
-     * convenience getter for easy access to form fields
-     */
     get f() { return this.form.controls; }
 
     onSubmit() {
         this.submitted = true;
 
-        // reset alerts on submit
         this.error = '';
-        this.success = '';
 
-        // stop here if the form is invalid
         if(this.form.invalid) {
             return;
         }
 
         this.loading = true;
-        this.accountService.login(this.f.email.value, this.f.password.value)
+        this.accountService.register(this.form.value)
             .pipe(first())
             .subscribe({
                 next: () => {
-                    // TODO: go to user dashboard instead.
-                    // get return url from query parameters or default to home page
-                    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/'
-                    this.router.navigateByUrl(returnUrl);
+                    this.router.navigate(['/login'], {queryParams: { registered: true }});
                 },
                 error: error => {
                     this.error = error;

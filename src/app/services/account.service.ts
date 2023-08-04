@@ -42,9 +42,12 @@ export class AccountService {
     }
 
     logout() {
-        console.log('AccountService.logout()');
         localStorage.removeItem('user');
         this.userSubject.next(null);
         this.router.navigate(['/']);
+    }
+
+    register(user: User) {
+        return this.http.post(`${environment.apiUrl}/api/users`, user);
     }
 }

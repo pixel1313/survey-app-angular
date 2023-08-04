@@ -10,12 +10,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ErrorInterceptor, TokenInterceptor } from './security';
+import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SurveyListComponent,
     LoginComponent,
+    RegisterComponent,
     HomeComponent,
   ],
   imports: [
