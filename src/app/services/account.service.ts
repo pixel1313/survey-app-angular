@@ -42,8 +42,10 @@ export class AccountService {
     }
 
     logout() {
-        localStorage.removeItem('user');
-        this.userSubject.next(null);
-        this.router.navigate(['/login']);
+        this.http.post(`${environment.apiUrl}/logout`, {}).pipe(map(response => {
+            localStorage.removeItem('user');
+            this.userSubject.next(null);
+            this.router.navigate(['/login']);
+        }));
     }
 }
