@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { AbstractService } from "./abstract.service";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Survey } from "../models/Survey";
 import { Observable } from "rxjs";
+import { Survey } from "@app/models";
 
 @Injectable({
     providedIn: 'root'

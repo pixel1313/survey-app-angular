@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
-import { Survey } from "../../models/Survey";
-import { SurveyService } from "src/app/services/survey.service";
+import { Survey } from "@app/models";
+import { SurveyService } from "@app/services";
 
 @Component({
     selector: 'app-survey-list',
