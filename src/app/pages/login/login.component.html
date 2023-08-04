@@ -1,27 +1,34 @@
-<form class="row g-3">
-    <div class="col-md-4">
-        <label for="email" class="form-label">Email</label>
-        <!-- add class "is-valid" from server if okay -->
-        <!-- add class "is-invalid" from server if not okay -->
-        <input type="text" class="form-control" id="email" required>
-        <!-- add div for valid or invalid feedback -->
-    </div>
-    <div class="col-md-4">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" required>
-        <!--
-        <div class="valid-feedback">
-            Looks good!
+<div class="container col-md-6 offset-md-3 mt-5">
+    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+    <div class="card">
+        <h4 class="card-header">Login</h4>
+        <div class="card-body">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <!-- Email -->
+                <div class="mb-3">
+                    <label class="form-label"></label>
+                    <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors}" />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email is required</div>
+                    </div>
+                </div>
+                <!-- Password -->
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors}" />
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">Password is required</div>
+                    </div>
+                </div>
+                <!-- Sumbit button and loading indicator -->
+                <div>
+                    <button [disabled]="loading" class="btn btn-primary">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+                        Login
+                    </button>
+                    <!-- TODO: add registration button -->
+                </div>
+            </form>
         </div>
-        -->
-        <!--
-        <div class="invalid-feedback">
-            Looks bad!
-        </div>
-        -->
     </div>
-    <div class="col-12">
-        <button class="btn btn-primary" type="submit">Login</button>
-    </div>
-
-</form>
+</div>
