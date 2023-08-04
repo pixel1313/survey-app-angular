@@ -9,7 +9,7 @@ import { BehaviorSubject, Observable, map } from "rxjs";
 @Injectable({ providedIn: 'root' })
 export class AccountService {
     private userSubject: BehaviorSubject<User | null>;
-    private user: Observable<User | null>;
+    public user: Observable<User | null>;
 
     constructor(
         private router: Router,
@@ -42,10 +42,9 @@ export class AccountService {
     }
 
     logout() {
-        this.http.post(`${environment.apiUrl}/logout`, {}).pipe(map(response => {
-            localStorage.removeItem('user');
-            this.userSubject.next(null);
-            this.router.navigate(['/login']);
-        }));
+        console.log('AccountService.logout()');
+        localStorage.removeItem('user');
+        this.userSubject.next(null);
+        this.router.navigate(['/']);
     }
 }

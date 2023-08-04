@@ -1,42 +1,76 @@
 <header>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar</a>
-          <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                      <a class="nav-link" routerLink="/surveys" routerLinkActive="active">Surveys</a>
-                  </li>
-              </ul>
-              <ul class="navbar-nav">
-                  <li class="nav-item" ngbDropdown>
-                      <a class="nav-link" role="button" ngbDropdownToggle id="adminDropdown">
-                      Admin
-                      </a>
-                      <div ngbDropdownMenu aria-labelledby="adminDropdown" class="dropdown-menu dropdown-menu-end">
-                          <a ngbDropdownItem href="#" (click)="$event.preventDefault()">Action</a>
-                          <div class="dropdown-divider"></div>
-                          <a ngbDropdownItem href="#" (click)="$event.preventDefault()">Another Action</a>
-                      </div>
-                  </li>
-              </ul>
-              <form class="d-flex" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Search</button>
-              </form>
-          </div>
-      </div>
-  </nav>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                    <a class="nav-link" routerLink="/" routerLinkActive="active">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/surveys" routerLinkActive="active">Surveys</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item" ngbDropdown>
+                        <a class="nav-link" role="button" ngbDropdownToggle id="adminDropdown">
+                        Admin
+                        </a>
+                        <div ngbDropdownMenu aria-labelledby="adminDropdown" class="dropdown-menu dropdown-menu-end">
+                            <a ngbDropdownItem href="#" (click)="$event.preventDefault()">Action</a>
+                            <div class="dropdown-divider"></div>
+                            <a ngbDropdownItem href="#" (click)="$event.preventDefault()">Another Action</a>
+                        </div>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-success" type="submit">Search</button>
+                </form>
+
+                <ul *ngIf="user" class="navbar-nav">
+                    <li class="nav-item" ngbDropdown>
+                        <button
+                            class="nav-link"
+                            role="button"
+                            ngbDropdownToggle
+                            id="accountDropdown">
+                            {{ user.email }}
+                        </button>
+                        <div
+                            ngbDropdownMenu
+                            aria-labelledby="accountDropdown"
+                        >
+                            <a
+                                ngbDropdownItem
+                                (click)="$event.preventDefault()">
+                                Profile
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <button
+                                ngbDropdownItem
+                                (click)="logout()">
+                                Logout
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+
+                <button *ngIf="!user" class="btn btn-outline-primary nav-item" routerLink="/login">Login</button>
+
+            </div>
+        </div>
+    </nav>
 
 </header>
 <div class="container-xxl bd-gutter mt-3 my-md-4 bd-layout">
