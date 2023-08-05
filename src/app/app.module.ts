@@ -8,7 +8,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // interceptors
-import { ErrorInterceptor, TokenInterceptor } from './security';
+import { ErrorInterceptor, JsonInterceptor, TokenInterceptor } from './security';
 
 // components
 import { AlertComponent } from './components';
@@ -37,6 +37,7 @@ import { DashboardPage, HomePage, LoginPage, RegisterPage, SurveyListPage } from
     NgbModule,
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JsonInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
