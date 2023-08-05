@@ -1,3 +1,3 @@
-export * from './account.service';
+export * from './AccountService';
 export * from './survey.service';
 export * from './AlertService';

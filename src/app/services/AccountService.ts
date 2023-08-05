@@ -50,4 +50,39 @@ export class AccountService {
     register(user: User) {
         return this.http.post(`${environment.apiUrl}/api/users`, user);
     }
+
+    getAll() {
+        return this.http.get<any>(`${environment.apiUrl}/api/users`);
+    }
+
+    getById(id: string) {
+        return this.http.get<User>(`${environment.apiUrl}/api/users/${id}`);
+    }
+
+    update(id: string, params: any) {
+        return this.http.patch(`${environment.apiUrl}/api/users/${id}`, params)
+            .pipe(map(x => {
+                // update stored user if the logged in user updated their own record
+                if(id == this.userValue?.id) {
+                    //update local storage
+                    const user = { ...this.userValue, ...params};
+                    localStorage.setItem('user', JSON.stringify(user));
+
+                    // publish updated user to subscribers
+                    this.userSubject.next(user);
+                }
+                return x;
+            }));
+    }
+
+    delete(id: string) {
+        return this.http.delete(`${environment.apiUrl}/api/users/${id}`)
+            .pipe(map(x => {
+                // auto logout if the logged in user deleted their own record
+                if(id == this.userValue?.id) {
+                    this.logout();
+                }
+                return x;
+            }));
+    }
 }

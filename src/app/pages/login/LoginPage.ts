@@ -1,8 +1,7 @@
 import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AlertService } from "@app/services";
-import { AccountService } from "@app/services/account.service";
+import { AccountService, AlertService } from "@app/services";
 import { first } from "rxjs";
 
 @Component({ templateUrl: './LoginPage.html' })
