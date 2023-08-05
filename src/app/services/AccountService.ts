@@ -60,7 +60,7 @@ export class AccountService {
     }
 
     update(id: string, params: any) {
-        return this.http.patch(`${environment.apiUrl}/api/users/${id}`, params)
+        return this.http.patch(`${environment.apiUrl}/api/users/${id}`, params, { headers: new HttpHeaders({'Content-Type': 'application/merge-patch+json'})})
             .pipe(map(x => {
                 // update stored user if the logged in user updated their own record
                 if(id == this.userValue?.id) {
