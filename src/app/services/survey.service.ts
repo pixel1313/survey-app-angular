@@ -1,29 +1,32 @@
 import { Injectable } from "@angular/core";
-import { AbstractService } from "./abstract.service";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, map } from "rxjs";
 import { Survey } from "@app/models";
+import { environment } from "@environments/environment";
 
-@Injectable({
-    providedIn: 'root'
-})
-export class SurveyService extends AbstractService {
+@Injectable({ providedIn: 'root' })
+export class SurveyService {
     
     constructor(
-        http: HttpClient
-    ) {
-        super(
-            http,
-            '/api/surveys{.format}{/id}{?page,itemsPerPage}',
-            new HttpHeaders({'Content-Type': 'application/json'})
-        );
+        private http: HttpClient
+    ) {}
+
+    getSurveys(page: number, itemsPerPage: number = 10): Observable<any> {
+        return this.http.get<any>(`${environment.apiUrl}/api/surveys?page=${page}&itemsPerPage=${itemsPerPage}`);
     }
 
-    getSurveys(page: number, itemsPerPage: number = 10): Observable<Survey[]> {
-        return this.getCollection<Survey>(page, itemsPerPage);
+    getById(id: number|string): Observable<Survey> {
+        return this.http.get<any>(`${environment.apiUrl}/api/surveys/${id}`);
     }
 
-    getSurvey(id: number|string): Observable<Survey> {
-        return this.getOne<Survey>(id);
+    update(id: string, params: any) {
+        //TODO: update survey.
+    }
+
+    delete(id: string) {
+        return this.http.delete(`${environment.apiUrl}/api/surveys${id}`)
+            .pipe(map(x => {
+                return x;
+            }));
     }
 }

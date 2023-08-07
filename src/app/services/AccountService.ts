@@ -41,6 +41,12 @@ export class AccountService {
             }));
     }
 
+    relogin(returnUrl: string) {
+        localStorage.removeItem('user');
+        this.userSubject.next(null);
+        this.router.navigateByUrl(returnUrl);
+    }
+
     logout() {
         localStorage.removeItem('user');
         this.userSubject.next(null);
@@ -52,7 +58,7 @@ export class AccountService {
     }
 
     getAll() {
-        return this.http.get<User[]>(`${environment.apiUrl}/api/users`);
+        return this.http.get<any>(`${environment.apiUrl}/api/users`);
     }
 
     getById(id: string) {

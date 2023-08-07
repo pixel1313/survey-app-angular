@@ -11,7 +11,7 @@ export class JsonInterceptor implements HttpInterceptor {
         if(isApiUrl) {
             request = request.clone({
                 setHeaders: {
-                    Accept: 'application/json'
+                    Accept: 'application/ld+json'
                 }
             });
         }

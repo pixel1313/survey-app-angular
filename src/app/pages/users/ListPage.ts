@@ -14,7 +14,7 @@ export class ListPage implements OnInit {
             .pipe(first())
             .subscribe((response) => {
                 console.log(response);
-                this.users = response;
+                this.users = response['hydra:member'];
             });
     }
 

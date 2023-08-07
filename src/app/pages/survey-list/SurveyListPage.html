@@ -13,11 +13,17 @@
                     {{ survey.name }}
                 </a>
             </th>
-            <td>{{ survey.owner }}</td>
+            <td>
+                <a [routerLink]="['/user', survey.owner?.id]">
+                    {{ survey.owner?.username }}
+                </a>
+            </td>
             <td>{{ survey.published }}</td>
         </tr>
-        <tr *ngIf="surveys.length == 0">
-            <td colspan="3">no records found</td>
+        <tr *ngIf="!surveys">
+            <td colspan="3" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
         </tr>
     </tbody>
     <tfoot>

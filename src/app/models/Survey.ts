@@ -1,6 +1,8 @@
+import { User } from "./User";
+
 export class Survey {
     id?: number | string;
     name?: string;
-    owner?: number | string;
+    owner?: User;
     published?: boolean;
 }

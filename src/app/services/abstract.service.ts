@@ -9,7 +9,7 @@ export abstract class AbstractService {
 
     totalItems = 0;
 
-    constructor(private http: HttpClient, urlTemplate: string, httpHeaders?: HttpHeaders) {
+    constructor(protected http: HttpClient, urlTemplate: string, httpHeaders?: HttpHeaders) {
         this.urlTemplate = this.baseUrl + urlTemplate;
 
         if(httpHeaders) {
@@ -27,6 +27,7 @@ export abstract class AbstractService {
         return this.http.get<any>(url, this.httpOptions).pipe(
             map(res => {
                 this.totalItems = res['hydra:totalItems'];
+                console.log(res);
                 return res['hydra:member'] as T[];
             })
         );
