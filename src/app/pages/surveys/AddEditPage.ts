@@ -1,43 +1,43 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AccountService, AlertService } from "@app/services";
+import { AccountService, AlertService, SurveyService } from "@app/services";
 import { first } from "rxjs";
 
-@Component({ templateUrl: 'AddEditPage.html'})
+
+@Component({ templateUrl: 'AddEditPage.html' })
 export class AddEditPage implements OnInit {
     form!: FormGroup;
     id?: string;
     title!: string;
     loading = false;
-    submitting = false;
     submitted = false;
+    submitting = false;
 
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
+        private surveyService: SurveyService,
         private accountService: AccountService,
         private alertService: AlertService
     ) {}
 
     ngOnInit(): void {
-        this.id = this.route.snapshot.params['id']
+        this.id = this.route.snapshot.params['id'];
 
-        // form with validation rules
         this.form = this.formBuilder.group({
-            username: ['', Validators.required],
-            email: ['', Validators.required],
-            // password only required in add mode
-            password: ['', [Validators.minLength(8), ...(!this.id ? [Validators.required] : [])]]
+            name: ['', Validators.required],
+            // TODO: add questions.
         });
 
-        //this.title = 'Add User';
+        this.title = 'Add Survey';
+
         if(this.id) {
             // edit mode
-            this.title = 'Edit User';
+            this.title = 'Edit Survey';
             this.loading = true;
-            this.accountService.getById(this.id)
+            this.surveyService.getById(this.id)
                 .pipe(first())
                 .subscribe(x => {
                     this.form.patchValue(x);
@@ -45,6 +45,7 @@ export class AddEditPage implements OnInit {
                 });
         }
     }
+
 
     get f() { return this.form.controls; }
 
@@ -60,12 +61,12 @@ export class AddEditPage implements OnInit {
         }
 
         this.submitting = true;
-        this.saveUser()
+        this.saveSurvey()
             .pipe(first())
             .subscribe({
                 next: () => {
-                    this.alertService.success('User saved', true);
-                    this.router.navigateByUrl('/users');
+                    this.alertService.success('Survey saved', true);
+                    this.router.navigateByUrl('/surveys');
                 },
                 error: error => {
                     this.alertService.error(error);
@@ -74,10 +75,11 @@ export class AddEditPage implements OnInit {
             });
     }
 
-    private saveUser() {
-        // create or update user based on id param
+    private saveSurvey() {
+        var params = { ...this.form.value, owner: this.accountService.userValue?.id };
+        // create or update survey based on id param
         return this.id
-            ? this.accountService.update(this.id!, this.form.value)
-            : this.accountService.register(this.form.value);
+            ? this.surveyService.update(this.id!, params)
+            : this.surveyService.create(params);
     }
 }

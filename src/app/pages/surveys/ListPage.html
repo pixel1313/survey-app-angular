@@ -1,0 +1,46 @@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Owner</th>
+            <th scope="col">Published</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let survey of surveys">
+            <th scope="row">
+                <a [routerLink]="['/survey', survey.id]">
+                    {{ survey.name }}
+                </a>
+            </th>
+            <td>
+                <a [routerLink]="['/user', survey.owner?.id]">
+                    {{ survey.owner?.username }}
+                </a>
+            </td>
+            <td>{{ survey.published }}</td>
+        </tr>
+        <tr *ngIf="!surveys">
+            <td colspan="3" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <td colspan="3">
+            <div class="d-flex justify-content-between p-2">
+                <ngb-pagination
+                    [collectionSize]="totalItems"
+                    [(page)]="page"
+                    [pageSize]="pageSize"
+                    (pageChange)="refreshSurveys()"
+                ></ngb-pagination>
+                <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshSurveys()">
+                    <option [ngValue]="5">5 items per page</option>
+                    <option [ngValue]="10">10 items per page</option>
+                    <option [ngValue]="52">25 items per page</option>
+                </select>
+            </div>
+        </td>
+    </tfoot>
+</table>

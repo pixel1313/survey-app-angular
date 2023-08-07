@@ -9,6 +9,7 @@ import { RegisterPage } from './pages/register/RegisterPage';
 import { DashboardPage } from './pages/dashboard/DashboardPage';
 
 const usersModule = () => import('./pages/users/UsersModule').then(x => x.UsersModule);
+const surveysModule = () => import('./pages/surveys/SurveysModule').then(x => x.SurveysModule);
 
 const routes: Routes = [
   { path: '', component: HomePage },
@@ -17,9 +18,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterPage },
   
   { path: 'users', loadChildren: usersModule, canActivate: [AuthGuard]},
-
-  { path: 'surveys', component: SurveyListPage, canActivate: [AuthGuard] },
-  { path: 'survey/:id', component: SurveyComponent },
+  { path: 'surveys', loadChildren: surveysModule, canActivate: [AuthGuard]},
 
   // otherwise redirect to home
   { path: '**', redirectTo: '/surveys', pathMatch: 'full' },

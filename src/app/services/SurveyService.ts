@@ -21,6 +21,11 @@ export class SurveyService {
 
     update(id: string, params: any) {
         //TODO: update survey.
+        return this.http.patch<any>(`${environment.apiUrl}/api/surveys/${id}`, params);
+    }
+
+    create(params: any) {
+        return this.http.post<any>(`${environment.apiUrl}/api/surveys`, params);
     }
 
     delete(id: string) {
