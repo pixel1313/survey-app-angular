@@ -20,6 +20,7 @@ import { DashboardPage, HomePage, LoginPage, RegisterPage } from './pages';
   declarations: [
     // components
     AlertComponent,
+    //DynamicFormQuestionComponent,
     // pages
     AppComponent,
     LoginPage,

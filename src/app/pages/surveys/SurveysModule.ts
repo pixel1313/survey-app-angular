@@ -4,6 +4,9 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RoutingModule } from "./RoutingModule";
 import { ListPage } from "./ListPage";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { AddEditPage } from "./AddEditPage";
+import { ViewPage } from "./ViewPage";
+import { DynamicFormQuestionComponent } from "@app/components";
 
 
 @NgModule({
@@ -15,7 +18,12 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
         RoutingModule,
     ],
     declarations: [
+        //pages
         ListPage,
+        AddEditPage,
+        ViewPage,
+        //components
+        DynamicFormQuestionComponent,
     ],
 })
 export class SurveysModule {}

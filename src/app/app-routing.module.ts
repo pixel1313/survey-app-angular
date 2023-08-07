@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SurveyListPage } from './pages/survey-list/SurveyListPage';
-import { SurveyComponent } from './pages/survey/SurveyPage';
 import { LoginPage } from './pages/login/LoginPage';
 import { HomePage } from './pages/home/HomePage';
 import { AuthGuard } from './security';
