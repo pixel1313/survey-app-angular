@@ -14,7 +14,7 @@ import { ErrorInterceptor, JsonInterceptor, TokenInterceptor } from './security'
 import { AlertComponent } from './components';
 
 // pages
-import { DashboardPage, HomePage, LoginPage, RegisterPage, SurveyListPage } from './pages';
+import { DashboardPage, HomePage, LoginPage, RegisterPage } from './pages';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,6 @@ import { DashboardPage, HomePage, LoginPage, RegisterPage, SurveyListPage } from
     AlertComponent,
     // pages
     AppComponent,
-    SurveyListPage,
     LoginPage,
     RegisterPage,
     HomePage,
