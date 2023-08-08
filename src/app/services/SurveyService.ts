@@ -15,7 +15,7 @@ export class SurveyService {
         return this.http.get<any>(`${environment.apiUrl}/api/surveys?page=${page}&itemsPerPage=${itemsPerPage}`);
     }
 
-    getById(id: number|string): Observable<Survey> {
+    getById(id: string): Observable<Survey> {
         return this.http.get<any>(`${environment.apiUrl}/api/surveys/${id}`);
     }
 
